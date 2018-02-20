@@ -1,5 +1,6 @@
 package sdu.cs58.pichsinee.logintest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //2. Initial view ผูกตัวแปรบน java ให้รู้จักกับ element บน xml
-        nameEditText = findViewById(R.id.txtName);
+        nameEditText = findViewById(R.id.txvName);
         usernameEditText = findViewById(R.id.txtUsername);
         passwordEditText = findViewById(R.id.txtPassword);
         loginButton = findViewById(R.id.btnLogin);
@@ -40,6 +41,11 @@ public class LoginActivity extends AppCompatActivity {
                 //ตรวจสอบการล็อคอิน
                 if ((userString.equals("admin")) && (passString.equals("1234"))) {
                     Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+
+                    //ส่งข้อมูล NameString ไปหน้า MainActivity
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    mainIntent.putExtra("nameString", nameString);
+                    startActivity(mainIntent);
                 } else {
                     Toast.makeText(getApplicationContext(),"Login Fail!!",Toast.LENGTH_SHORT).show();
                 }
